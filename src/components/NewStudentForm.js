@@ -15,6 +15,21 @@ class NewStudentForm extends Component {
     };
   }
 
+  onInputChange = (event) => {
+    console.log(`Got an input change event on input ${event.target.name}, new value is ${event.target.value}`);
+
+    // Because the key is stored in a variable
+    // (event.target.name), we _must_ create an
+    // empty object and use subscript notation
+    // to set the value
+    // JavaScript rules, not React
+    const newState = {};
+    newState[event.target.name] = event.target.value;
+    this.setState(newState);
+
+    // this.setState({ other_key: 'value' });
+  }
+
   render() {
     return (
       <form id="new-student" >
@@ -24,6 +39,7 @@ class NewStudentForm extends Component {
             name="name"
             type="text"
             value={this.state.name}
+            onChange={this.onInputChange}
             />
         </div>
 
@@ -33,6 +49,7 @@ class NewStudentForm extends Component {
             name="email"
             type="text"
             value={this.state.email}
+            onChange={this.onInputChange}
             />
         </div>
 
