@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import Student from './Student';
+import NewStudentForm from './NewStudentForm';
 
 // Idea: take as props a list of students
 // Each student is a plain JS object
@@ -46,10 +47,10 @@ class StudentCollection extends Component {
         />
     });
 
-
     return (
       <div className="student-collection">
         <h1>Hello from student collection</h1>
+        <NewStudentForm />
         {studentComponents}
       </div>
     );
