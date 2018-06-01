@@ -35,6 +35,19 @@ class StudentCollection extends Component {
     this.setState({students: updatedStudents});
   }
 
+  addStudent = (name, email) => {
+    console.log(`Adding a student with name ${name} and email ${email}`);
+    const newStudent = {
+      name: name,
+      email: email,
+      present: false
+    };
+
+    const updatedStudents = this.state.students;
+    updatedStudents.push(newStudent);
+    this.setState({ students: updatedStudents });
+  }
+
   render() {
     const studentComponents = this.state.students.map((student, index) => {
       return <Student key={ index }
@@ -50,7 +63,9 @@ class StudentCollection extends Component {
     return (
       <div className="student-collection">
         <h1>Hello from student collection</h1>
-        <NewStudentForm />
+        <NewStudentForm
+          addStudentCallback={this.addStudent}
+          />
         {studentComponents}
       </div>
     );

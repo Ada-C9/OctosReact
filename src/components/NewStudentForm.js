@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 class NewStudentForm extends Component {
   static propTypes = {
-
+    addStudentCallback: PropTypes.func.isRequired,
   }
 
   constructor() {
@@ -16,7 +16,7 @@ class NewStudentForm extends Component {
   }
 
   onInputChange = (event) => {
-    console.log(`Got an input change event on input ${event.target.name}, new value is ${event.target.value}`);
+    // console.log(`Got an input change event on input ${event.target.name}, new value is ${event.target.value}`);
 
     // Because the key is stored in a variable
     // (event.target.name), we _must_ create an
@@ -30,9 +30,28 @@ class NewStudentForm extends Component {
     // this.setState({ other_key: 'value' });
   }
 
+  onFormSubmit = (event) => {
+    event.preventDefault();
+
+    console.log("Form submission!");
+
+    // Question: how do we tell the parent component
+    // (StudentCollection) that something happened?
+    // Answer: Callback via props
+
+    // With a controlled form, the component's state
+    // (not the DOM) is the source of truth
+    const name = this.state.name;
+    const email = this.state.email;
+    this.props.addStudentCallback(name, email);
+  }
+
   render() {
     return (
-      <form id="new-student" >
+      <form
+        id="new-student"
+        onSubmit={this.onFormSubmit}
+        >
         <div>
           <label htmlFor="name">Student Name</label>
           <input
