@@ -44,6 +44,14 @@ class NewStudentForm extends Component {
     const name = this.state.name;
     const email = this.state.email;
     this.props.addStudentCallback(name, email);
+
+    // Question: If the form is controlled, and the
+    // state of this component is the source of truth
+    // how should we clear the form?
+    this.setState({
+      name: '',
+      email: '',
+    })
   }
 
   render() {
